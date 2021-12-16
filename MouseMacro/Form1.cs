@@ -34,6 +34,7 @@ namespace MouseMacro
             mouseNameCombobBox.Items.Add(MouseButtons.None);
             mouseNameCombobBox.Items.Add(MouseButtons.XButton1);
             mouseNameCombobBox.Items.Add(MouseButtons.XButton2);
+            mouseNameCombobBox.Items.Add(MouseButtons.Right);
 
             mouseNameCombobBox.SelectedIndex = mouseNameCombobBox.FindStringExact("XButton2");
         }
