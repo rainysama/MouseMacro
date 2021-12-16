@@ -37,6 +37,8 @@ namespace MouseMacro
             this.startBtn = new System.Windows.Forms.Button();
             this.stopBtn = new System.Windows.Forms.Button();
             this.mouseNameCombobBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.mouseButtonCombobox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.repeatMouseCount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,13 +71,13 @@ namespace MouseMacro
             this.mouseButtonName.AutoSize = true;
             this.mouseButtonName.Location = new System.Drawing.Point(12, 393);
             this.mouseButtonName.Name = "mouseButtonName";
-            this.mouseButtonName.Size = new System.Drawing.Size(108, 13);
+            this.mouseButtonName.Size = new System.Drawing.Size(60, 13);
             this.mouseButtonName.TabIndex = 4;
-            this.mouseButtonName.Text = "Kullanılacak fare tuşu";
+            this.mouseButtonName.Text = "Makro tuşu";
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(15, 426);
+            this.startBtn.Location = new System.Drawing.Point(12, 478);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(105, 23);
             this.startBtn.TabIndex = 5;
@@ -85,7 +87,7 @@ namespace MouseMacro
             // 
             // stopBtn
             // 
-            this.stopBtn.Location = new System.Drawing.Point(138, 426);
+            this.stopBtn.Location = new System.Drawing.Point(138, 478);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(103, 23);
             this.stopBtn.TabIndex = 6;
@@ -102,11 +104,33 @@ namespace MouseMacro
             this.mouseNameCombobBox.Size = new System.Drawing.Size(91, 21);
             this.mouseNameCombobBox.TabIndex = 7;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 429);
+            this.label1.MaximumSize = new System.Drawing.Size(120, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 26);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Makro tuşundan sonra kullanılacak fare tuşu";
+            // 
+            // mouseButtonCombobox
+            // 
+            this.mouseButtonCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mouseButtonCombobox.FormattingEnabled = true;
+            this.mouseButtonCombobox.Location = new System.Drawing.Point(149, 434);
+            this.mouseButtonCombobox.Name = "mouseButtonCombobox";
+            this.mouseButtonCombobox.Size = new System.Drawing.Size(91, 21);
+            this.mouseButtonCombobox.TabIndex = 9;
+            this.mouseButtonCombobox.SelectedIndexChanged += new System.EventHandler(this.mouseButtonCombobox_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(252, 461);
+            this.ClientSize = new System.Drawing.Size(252, 507);
+            this.Controls.Add(this.mouseButtonCombobox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.mouseNameCombobBox);
             this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.startBtn);
@@ -115,7 +139,7 @@ namespace MouseMacro
             this.Controls.Add(this.repeatProcessCountLabel);
             this.Controls.Add(this.processListBox);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(268, 500);
+            this.MaximumSize = new System.Drawing.Size(268, 546);
             this.Name = "Form1";
             this.Text = "Mouse Macro";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -135,6 +159,8 @@ namespace MouseMacro
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Button stopBtn;
         private System.Windows.Forms.ComboBox mouseNameCombobBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox mouseButtonCombobox;
     }
 }
 

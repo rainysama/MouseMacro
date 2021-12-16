@@ -20,23 +20,29 @@ namespace Helper
 
 
         private IKeyboardMouseEvents m_GlobalHook;
+        
         private const uint MOUSEEVENTF_LEFTDOWN = 0x02;
         private const uint MOUSEEVENTF_LEFTUP = 0x04;
+
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
+        private const int MOUSEEVENTF_RIGHTUP = 0x10;
 
         private Func<bool> m_isRunning;
         private Func<string> m_getSelectedProcessName;
         private Func<int> m_getRepeatedMouseCount;
         private Func<MouseButtons> m_getCurrentMouseButton;
+        private Func<MouseButtons> m_getExecuteMouseButton;
 
         private int m_remainCountToClick = 0;
         private uint m_mouseX, m_mouseY = 0;
 
-        public MouseMacro(Func<string> getSelectedProcessName, Func<int> getrepeatedMouseCount, Func<MouseButtons> getCurrentMouseButton, Func<bool> isRunning)
+        public MouseMacro(Func<string> getSelectedProcessName, Func<int> getrepeatedMouseCount, Func<MouseButtons> getCurrentMouseButton, Func<bool> isRunning, Func<MouseButtons> getExecuteMouseButton)
         {
             m_getSelectedProcessName = getSelectedProcessName;
             m_getRepeatedMouseCount = getrepeatedMouseCount;
             m_getCurrentMouseButton = getCurrentMouseButton;
             m_isRunning = isRunning;
+            m_getExecuteMouseButton = getExecuteMouseButton;
 
             m_GlobalHook = Hook.GlobalEvents();
             m_GlobalHook.MouseDownExt += OnMouseDown;
@@ -55,7 +61,12 @@ namespace Helper
                 {
                     if (m_remainCountToClick > 1)
                     {
-                        mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, m_mouseX, m_mouseY, 0, 0);
+                        if (m_getExecuteMouseButton() == MouseButtons.Left)
+                            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, m_mouseX, m_mouseY, 0, 0);
+                        else
+                            mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, m_mouseX, m_mouseY, 0, 0);
+
+
                         m_remainCountToClick--;                        
                         Thread.Sleep(100);
                     }

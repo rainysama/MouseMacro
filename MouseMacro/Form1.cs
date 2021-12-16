@@ -9,6 +9,8 @@ namespace MouseMacro
     public partial class Form1 : Form
     {
         private MouseButtons currentMouseButton = MouseButtons.XButton2;
+        private MouseButtons executeMouseButton = MouseButtons.Left;
+
         private bool isRunning = false;
         private Thread thread;
 
@@ -19,7 +21,7 @@ namespace MouseMacro
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            thread = new Thread(new Helper.MouseMacro(this.GetSelectedProcessName, this.GetRepeatedMouseCount, this.GetCurrentMouseButton, this.IsRunning).Loop);
+            thread = new Thread(new Helper.MouseMacro(this.GetSelectedProcessName, this.GetRepeatedMouseCount, this.GetCurrentMouseButton, this.IsRunning, this.GetExecuteMouseButton).Loop);
             thread.Start();
 
             stopBtn.Enabled = false;
@@ -33,10 +35,15 @@ namespace MouseMacro
             mouseNameCombobBox.Items.Clear();
             mouseNameCombobBox.Items.Add(MouseButtons.None);
             mouseNameCombobBox.Items.Add(MouseButtons.XButton1);
-            mouseNameCombobBox.Items.Add(MouseButtons.XButton2);
-            mouseNameCombobBox.Items.Add(MouseButtons.Right);
+            mouseNameCombobBox.Items.Add(MouseButtons.XButton2);            
 
             mouseNameCombobBox.SelectedIndex = mouseNameCombobBox.FindStringExact("XButton2");
+
+            mouseButtonCombobox.Items.Clear();
+            mouseButtonCombobox.Items.Add(MouseButtons.Left);
+            mouseButtonCombobox.Items.Add(MouseButtons.Right);
+
+            mouseButtonCombobox.SelectedIndex = mouseButtonCombobox.FindStringExact("Left");
         }
 
         private void RefreshProcessList()
@@ -114,5 +121,15 @@ namespace MouseMacro
         }
 
         private bool IsRunning() => isRunning;
+
+        private MouseButtons GetExecuteMouseButton()
+        {
+            return executeMouseButton;
+        }
+
+        private void mouseButtonCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            executeMouseButton = (MouseButtons)Enum.Parse(typeof(MouseButtons), mouseButtonCombobox.SelectedItem?.ToString());
+        }
     }
 }
