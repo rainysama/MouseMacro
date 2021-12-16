@@ -59,9 +59,6 @@ namespace MouseMacro
             var activatedProcessFileName = GetActiveProcessFileName();
             if (e.Button == currentMouseButton && activatedProcessFileName == processListBox.SelectedItem.ToString())
             {
-                Console.WriteLine("Heyo works");
-                return;
-
                 for (int i = 0; i < repeatMouseCount.Value; ++i)
                     mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, (uint)e.X, (uint)e.Y, 0, 0);
 
